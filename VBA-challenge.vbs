@@ -23,8 +23,7 @@ For Each ws In Worksheets
     ws.Range("K1") = "Percent Change"
     
     'defining Total_Stock_Volume
-    'Dim Total_Stock_Volume As Long
-    'Total_Stock_Volume = 0
+    Dim Total_Stock_Volume As Double
     ws.Range("L1") = "Total Stock Volume"
     
     'defining Open_Price
@@ -45,8 +44,8 @@ For Each ws In Worksheets
     
     'Define Greatest_Total_Volume
     ws.Range("O4") = "Greatest Total Volume"
-    'Dim Greatest_Total_Volume As Long
-    'Greatest_Total_Volume = 0
+    Dim Greatest_Total_Volume As Double
+    Greatest_Total_Volume = 0
     
     'column name
     ws.Range("Q1") = "Value"
@@ -70,6 +69,8 @@ For Each ws In Worksheets
          Yearly_Change = ws.Cells(i, 6) - Open_Price
          'set Percent Change
          Percent_Change = (ws.Cells(i, 6) / Open_Price) - 1
+         'add last row to the Total_Stock_Volume count
+         Total_Stock_Volume = Total_Stock_Volume + ws.Cells(i, 7).Value
          
          
          'print the Ticker name in the result column
@@ -82,7 +83,7 @@ For Each ws In Worksheets
          ws.Range("K" & Summary_Table_Row).Value = Percent_Change
          'set number format for Percent_Change
          ws.Range("K" & Summary_Table_Row).NumberFormat = "0.00%"
-         'print Stock Volume
+         'print Total Stock Volume
          ws.Range("L" & Summary_Table_Row).Value = Total_Stock_Volume
          
          'add one to the Summary_Table_Row
@@ -153,5 +154,7 @@ For Each ws In Worksheets
     End With
     
 Next ws
+
+
 
 End Sub
